@@ -6,7 +6,6 @@
 package com.primerproyecto.mgb4.Security;
 
 //clase que va a controlar todo el JWT
-
 import com.primerproyecto.mgb4.Security.JWT.JwtEntryPoint;
 import com.primerproyecto.mgb4.Security.JWT.JwtTokenFilter;
 import com.primerproyecto.mgb4.Security.Service.UserDetailsImpl;
@@ -21,36 +20,38 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class MainSecurity extends WebSecurityConfigurerAdapter {
 
-@Configuration 
-@EnableGlobalMethodSecurity(prePostEnabled=true)
-public class MainSecurity extends WebSecurityConfigurerAdapter{
     @Autowired
     UserDetailsImpl userDetailsServicesImpl;
     @Autowired
     JwtEntryPoint jwtEntryPoint;
-    
+
     @Bean
-    public JwtTokenFilter jwtTokenFilter(){
-        return new JwtTokenFilter();           
+    public JwtTokenFilter jwtTokenFilter() {
+        return new JwtTokenFilter();
     }
-    
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       http.cors().and().csrf().disable() //desabilitamos las opciones
-               .authorizeRequests()
-               .antMatchers("/auth/**").permitAll()
-               .anyRequest().authenticated()
-               .and()
-               .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
-               .and()
-               .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.cors().and().csrf().disable() //desabilitamos las opciones
+                .authorizeRequests()
+                .antMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
@@ -58,15 +59,15 @@ public class MainSecurity extends WebSecurityConfigurerAdapter{
         return super.authenticationManager();
     }
 
+    @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean(); 
+        return super.authenticationManagerBean();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsServicesImpl).passwordEncoder(passwordEncoder());
     }
-    
-    
+
 }
