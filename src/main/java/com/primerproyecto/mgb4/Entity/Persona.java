@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter @Setter //representa todos los getters y setters
 @Entity
 public class Persona {
     @Id
@@ -25,7 +25,6 @@ public class Persona {
     @Size(min= 1, max= 50, message="No cumple con las condiciones de longitud")
     private String apellido;
    
-    @NotNull
     @Size(min= 1, max= 50, message="No cumple con las condiciones de longitud")
     private String img;
     

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Esta clase accede directamente a la base de datos
  */
 package com.primerproyecto.mgb4.Security.Entity;
 
@@ -41,6 +39,8 @@ public class Usuario {
     @ManyToMany(fetch= FetchType.EAGER)
     @JoinTable(name="usuario_rol", joinColumns= @JoinColumn(name="usuario_id"), inverseJoinColumns = @JoinColumn(name= "rol_id"))
     private Set<Rol> roles= new HashSet<>();
+    //aqui creamos la union de dos tablas
+    
     
     //constructores
 
@@ -54,6 +54,8 @@ public class Usuario {
         this.password = password;
     }
 
+   //setter and getter
+    
     public int getId() {
         return id;
     }

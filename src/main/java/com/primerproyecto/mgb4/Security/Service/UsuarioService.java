@@ -14,8 +14,8 @@ public class UsuarioService {
     @Autowired
     iUsuarioRepository iusuarioRepository;
     
-    public Optional<Usuario> getByNombreUsuario(String NombreUsuario){
-       return iusuarioRepository.findByNombreUsuario(NombreUsuario);  
+    public Optional<Usuario> getByNombreUsuario(String nombreUsuario){
+       return iusuarioRepository.findByNombreUsuario(nombreUsuario);  
     }
     
     public boolean existsByNombreUsuario(String nombreUsuario){

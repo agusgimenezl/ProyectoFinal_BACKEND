@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ImpPersonaService implements IPersonaService{
+public class ImpPersonaService implements IPersonaService{ //el servicio IMPLEMENTA los metodos definidos en la interfaz 
     @Autowired IPersonaRepository ipersonaRepository; //permite inyectar dependencias en otras
     //ipersonaRepository es una variable de clase IPersonaRepository, al poner @autowired permite usar jpa
     //luego en las funciones
 
-    @Override
+    @Override //se informa al compilador que intentamos sobre-escribir un metodo existente.
     public List<Persona> getPersona() {
         List<Persona> persona = ipersonaRepository.findAll();
         return persona;

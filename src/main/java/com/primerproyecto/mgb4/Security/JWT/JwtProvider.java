@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Esta clase GENERA EL TOKEN
  */
 package com.primerproyecto.mgb4.Security.JWT;
 
@@ -30,7 +28,6 @@ public class JwtProvider {
     
      @Value("${jwt.secret}")
      private String secret;
-     
      @Value("${jwt.expiration}")
      private int expiration;
      

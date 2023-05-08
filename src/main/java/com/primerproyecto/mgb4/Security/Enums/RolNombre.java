@@ -5,10 +5,7 @@
  */
 package com.primerproyecto.mgb4.Security.Enums;
 
-/**
- *
- * @author Agustina
- */
+
 public enum RolNombre {
     ROLE_ADMIN, ROLE_USER
 }
