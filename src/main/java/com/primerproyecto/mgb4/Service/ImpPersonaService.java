@@ -2,39 +2,52 @@
 package com.primerproyecto.mgb4.Service;
 
 import com.primerproyecto.mgb4.Entity.Persona;
-import com.primerproyecto.mgb4.Interface.IPersonaService;
 import com.primerproyecto.mgb4.Repository.IPersonaRepository;
 import java.util.List;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ImpPersonaService implements IPersonaService{ //el servicio IMPLEMENTA los metodos definidos en la interfaz 
-    @Autowired IPersonaRepository ipersonaRepository; //permite inyectar dependencias en otras
+@Transactional
+public class ImpPersonaService{ //el servicio IMPLEMENTA los metodos definidos en la interfaz 
+    @Autowired 
+    IPersonaRepository ipersonaRepository; //permite inyectar dependencias en otras
     //ipersonaRepository es una variable de clase IPersonaRepository, al poner @autowired permite usar jpa
     //luego en las funciones
-
-    @Override //se informa al compilador que intentamos sobre-escribir un metodo existente.
-    public List<Persona> getPersona() {
-        List<Persona> persona = ipersonaRepository.findAll();
-        return persona;
+     
+    public List<Persona> list(){
+        return ipersonaRepository.findAll(); 
+      
     }
 
-    @Override
-    public void savePersona(Persona persona) {
-        ipersonaRepository.save(persona);
+    public Optional<Persona> getOne(int id){
+        return ipersonaRepository.findById(id);
     }
-
-    @Override
-    public void deletePersona(Long id) {
+    
+    public Optional<Persona> getByNombre(String nombre){
+        return ipersonaRepository.findByNombre(nombre);
+        
+    }
+    
+    public void save(Persona persona){ 
+        ipersonaRepository.save(persona); 
+    }
+    
+    public void delete(int id){
         ipersonaRepository.deleteById(id);
     }
-
-    @Override
-    public Persona findPersona(Long id) {
-       Persona persona = ipersonaRepository.findById(id).orElse(null); //si no encuentra la persona devuelve null (y funcione)
-       return persona;
+    
+    public boolean existsById(int id){
+        return ipersonaRepository.existsById(id);
+        
+    }
+    
+    public boolean existsByNombre(String nombre){
+        return ipersonaRepository.existsByNombre(nombre);
+    }
+    
    
     }
     
-}
