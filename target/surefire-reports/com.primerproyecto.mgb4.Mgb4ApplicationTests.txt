@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.primerproyecto.mgb4.Mgb4ApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 37.251 s - in com.primerproyecto.mgb4.Mgb4ApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 53.524 s - in com.primerproyecto.mgb4.Mgb4ApplicationTests
